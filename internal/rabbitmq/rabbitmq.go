@@ -47,3 +47,8 @@ func (r *RabbitMQ) Publish(queueName string, message []byte) error {
 
 	return err
 }
+
+func (r *RabbitMQ) Close() {
+	r.channel.Close()
+	r.conn.Close()
+}

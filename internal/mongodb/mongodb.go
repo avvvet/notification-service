@@ -1,0 +1,29 @@
+package mongodb
+
+import (
+	"context"
+	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
+type MongoDB struct {
+	client   *mongo.Client
+	database *mongo.Database
+}
+
+func NewMongoDB(mongoURI, dbName string) (*MongoDB, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	con, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoURI))
+	if err != nil {
+		return nil, err
+	}
+
+	return &MongoDB{
+		client:   con,
+		database: con.Database(dbName),
+	}, nil
+}
