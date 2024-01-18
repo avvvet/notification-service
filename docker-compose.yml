@@ -1,0 +1,14 @@
+version: '3'
+services:
+       
+  rabbitMQ-management:
+    container_name: rabbitmq-management-service
+    image: 'rabbitmq:3.11.0-management-alpine'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    environment:
+       RABBITMQ_DEFAULT_USER: rabbit  
+       RABBITMQ_DEFAULT_PASS: password
+

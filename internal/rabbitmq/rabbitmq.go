@@ -2,6 +2,7 @@ package rabbitmq
 
 import (
 	"context"
+	"log"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -22,6 +23,8 @@ func NewRabbitMQ(amqpURL string) (*RabbitMQ, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	log.Println("RabbitMQ connection established successfully.")
 
 	return &RabbitMQ{
 		conn:    conn,

@@ -85,7 +85,8 @@ func (q *QuoteHandler) HandleQuoteRequest(quoteRequest *QuoteRequest) {
 }
 
 func NewQuoteHandler() *QuoteHandler {
-	rabbitMQ, err := rabbitmq.NewRabbitMQ("amqp://guest:guest@localhost:5672/")
+
+	rabbitMQ, err := rabbitmq.NewRabbitMQ("amqp://rabbit:password@localhost:5672")
 	if err != nil {
 		log.Fatal("Error initializing RabbitMQ:", err)
 	}
