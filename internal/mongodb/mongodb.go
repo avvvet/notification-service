@@ -2,8 +2,10 @@ package mongodb
 
 import (
 	"context"
+	"log"
 	"time"
 
+	"github.com/avvvet/notification-service/internal/notification"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -26,4 +28,13 @@ func NewMongoDB(mongoURI, dbName string) (*MongoDB, error) {
 		client:   con,
 		database: con.Database(dbName),
 	}, nil
+}
+
+func (m *MongoDB) StoreNotification(notification *notification.Notification) error {
+	_, err := m.database.Collection("notifications").InsertOne(context.TODO(), notification)
+	if err != nil {
+		log.Println("Error storing notification in MongoDB:", err)
+		return err
+	}
+	return nil
 }
