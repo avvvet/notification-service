@@ -9,7 +9,7 @@ import (
 
 type RabbitMQ struct {
 	conn    *amqp.Connection
-	channel *amqp.Channel
+	Channel *amqp.Channel
 }
 
 func NewRabbitMQ(amqpURL string) (*RabbitMQ, error) {
@@ -25,7 +25,7 @@ func NewRabbitMQ(amqpURL string) (*RabbitMQ, error) {
 
 	return &RabbitMQ{
 		conn:    conn,
-		channel: channel,
+		Channel: channel,
 	}, nil
 }
 
@@ -33,7 +33,7 @@ func (r *RabbitMQ) Publish(queueName string, message []byte) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	err := r.channel.PublishWithContext(
+	err := r.Channel.PublishWithContext(
 		ctx,
 		"",        //exchange
 		queueName, // routing key (queue name)
@@ -49,6 +49,6 @@ func (r *RabbitMQ) Publish(queueName string, message []byte) error {
 }
 
 func (r *RabbitMQ) Close() {
-	r.channel.Close()
+	r.Channel.Close()
 	r.conn.Close()
 }

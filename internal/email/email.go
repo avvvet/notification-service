@@ -44,3 +44,14 @@ type SMTPConfig struct {
 	Password string
 	From     string
 }
+
+func GetSMTPConfig() SMTPConfig {
+	// Replace the following values with your actual SMTP configuration
+	return SMTPConfig{
+		Host:     "smtp.example.com",
+		Port:     587,
+		Username: "your_username",
+		Password: "your_password",
+		From:     "your_email@example.com",
+	}
+}
