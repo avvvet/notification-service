@@ -33,7 +33,7 @@ func NewRabbitMQ(amqpURL string) (*RabbitMQ, error) {
 }
 
 func (r *RabbitMQ) Publish(queueName string, message []byte) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	err := r.Channel.PublishWithContext(
@@ -43,7 +43,7 @@ func (r *RabbitMQ) Publish(queueName string, message []byte) error {
 		false,     // mandatory
 		false,     // immediate
 		amqp.Publishing{
-			ContentType: "text/plain",
+			ContentType: "application/json",
 			Body:        message,
 		},
 	)

@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch (Production)",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "env": {
+                "ENVIRONMENT": "staging"
+            },
+            "args": [
+                "staging",  
+                "--debug"
+            ],
+            "showLog": true,
+            "trace": "log",
+            "outputCapture": "stdout",
+            "showGlobalVariables": true,
+            "showLocalVariables": true,
+            "workDir": "${workspaceFolder}/"
+        }
+    ]
+}
